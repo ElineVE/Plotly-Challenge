@@ -67,8 +67,8 @@ function ChartBuild(sample) {
         var layout = {
             title: "Top 10 Bacteria Found",
             showlegend: false,
-            // width: 600,
-            // height: 400
+            width: 600,
+            height: 400
         };
 
         Plotly.newPlot("bar", data, layout);
