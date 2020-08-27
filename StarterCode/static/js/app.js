@@ -34,10 +34,8 @@ function MetaDataSample(sample) {
             }
         });
     });
-    // end of d3.js promise
 
 }
-
 
 function ChartBuild(sample) {
 
@@ -64,8 +62,6 @@ function ChartBuild(sample) {
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
     // Build Bar Chart using sample data
-
-    // var sampling = sample.samples.filter(plotID => plotID.id == ID)[0];
 
     sample_values = sample.sample_values
     otu_ids = sample.otu_ids
