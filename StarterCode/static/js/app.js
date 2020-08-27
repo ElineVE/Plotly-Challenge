@@ -63,15 +63,15 @@ function ChartBuild(sample) {
 
     // Build Bar Chart using sample data
 
-    sample_values = sample.sample_values
-    otu_ids = sample.otu_ids
-    otu_labels = sample.otu_labels
+    sample_values = sample.sample_values.slice(0, 10).reverse()
+    otu_ids = sample.otu_ids.slice(0, 10).reverse()
+    otu_labels = sample.otu_labels.slice(0, 10).reverse()
 
     var barChart = {
         type: 'bar',
-        x: sample.otu_ids.reverse(),
-        y: sample.sample_values.reverse(),
-        text: otu_labels.reverse(),
+        x: sample.otu_ids,
+        y: sample.sample_values,
+        text: otu_labels,
         marker: {
             color: '#1978B5',
         },
