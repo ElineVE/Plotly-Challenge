@@ -17,21 +17,22 @@ function MetaDataSample(sample) {
     d3.json("samples.json").then((samplesData) => {
 
         // Reading the data
+        var metaData = samplesData.metadata;
+        console.log(metaData)
+        var resultsArray = metaData.filter(s => s.id == sample) //sample_id = param fed into ChartBuild
+        var result = resultsArray[0]
 
-        console.log(samplesData)
-        samplesData.metadata.forEach((metadatum) => {
-            if (sample.id == metadatum.id) {
+        // samplesData.metadata.forEach((metadatum) => {
+        //     if (sample.id == metadatum.id) {
 
-                // Use `Object.entries` to add each key and value pair to the panel
+        // Use `Object.entries` to add each key and value pair to the panel
 
-                Object.entries(metadatum).forEach(([key, value]) => {
-                    panel.append("h6").text(`${key}: ${value}`);
+        Object.entries(result).forEach(([key, value]) => {
+            panel.append("h6").text(`${key}: ${value}`);
 
-                    // Console log key and value
+            // Console log key and value
 
-                    console.log(key, value)
-                });
-            }
+            console.log(key, value)
         });
     });
 
@@ -40,55 +41,68 @@ function MetaDataSample(sample) {
 function ChartBuild(sample) {
 
     // Build Bar Chart using sample data
-    // var samples = data.samples
-    sample_values = sample.sample_values
-    otu_ids = sample.otu_ids
-    otu_labels = sample.otu_labels
 
-    var barChart = {
-        type: 'bar',
-        y: sample.otu_ids.slice(0, 10).reverse(),
-        x: sample.sample_values.slice(0, 10).reverse(),
-        text: otu_labels,
-        marker: {
-            color: '#1978B5',
-        },
-        orientation: 'h'
-    };
+    d3.json("samples.json").then((data) => {
+        var samples = data.samples;
+        var resultsArray = samples.filter(s => s.id = sample) //sample_id = param fed into ChartBuild
+        var result = resultsArray[0]
 
-    var data = [barChart];
+        // var SampleFilter = sample.samples.filter(plotID => plotID.id == ID)[0];
 
-    var layout = {
-        title: "Top 10 Bacteria Found",
-        showlegend: false,
-        // width: 600,
-        // height: 400
-    };
+        // var samples = data.sample
+        var sample_values_filter = result.sample_values;
+        var otu_ids_filter = result.otu_ids;
+        var otu_labels_filter = result.otu_labels;
 
-    Plotly.newPlot("bar", data, layout);
+        // var sample_values_filter = .otu_ids_filter.slice(0, 10).(map(otuID => `OTU ${otuID}`);
+        //     var otu_ids_filter = SampleFilter.otu_labels_filter.slice(0, 10);
+        //     var otu_labels_filte = SampleFilter.sample_values_filter.slice(0, 10);
+
+        var barChart = {
+            type: 'bar',
+            y: otu_ids_filter.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
+            x: sample_values_filter.slice(0, 10).reverse(),
+            text: otu_labels_filter.slice(0, 10),
+            marker: {
+                color: '#1978B5',
+            },
+            orientation: 'h'
+        };
+
+        var data = [barChart];
+
+        var layout = {
+            title: "Top 10 Bacteria Found",
+            showlegend: false,
+            // width: 600,
+            // height: 400
+        };
+
+        Plotly.newPlot("bar", data, layout);
 
 
-    // Build Bubble Chart using sample data  
+        // Build Bubble Chart using sample data  
 
-    var bubbleLayout = {
-        margin: { t: 0 },
-        hovermode: "closest",
-        xaxis: { title: "OTU ID" }
-    };
+        var bubbleLayout = {
+            margin: { t: 0 },
+            hovermode: "closest",
+            xaxis: { title: "OTU ID" }
+        };
 
-    var bubbleData = [{
-        x: sample.otu_ids,
-        y: sample.sample_values,
-        text: sample.otu_labels,
-        mode: "markers",
-        marker: {
-            size: sample.sample_values,
-            color: sample.otu_ids,
-            colorscale: "Earth"
-        }
-    }];
+        var bubbleData = [{
+            x: otu_ids_filter,
+            y: sample_values_filter,
+            text: otu_labels_filter,
+            mode: "markers",
+            marker: {
+                size: sample_values_filter,
+                color: otu_ids_filter,
+                colorscale: "Earth"
+            }
+        }];
 
-    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+        Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+    });
 };
 
 
@@ -102,16 +116,17 @@ function Init() {
 
     // Use sample names list to populate select options
 
-    d3.json("/samples.json").then((samplesData) => {
-        samplesData.samples.forEach((sample) => {
+    d3.json("samples.json").then((samplesData) => {
+        var sampleName = samplesData.names
+        sampleName.forEach((sample) => {
             selector
                 .append("option")
-                .text(sample.id)
+                .text(sample)
                 .property("value", JSON.stringify(sample));
         });
         // Use first sample from list to build initial plots
 
-        const firstSample = samplesData.samples[0];
+        const firstSample = sampleName[0];
         ChartBuild(firstSample);
         MetaDataSample(firstSample);
     });
