@@ -89,87 +89,8 @@ function ChartBuild(sample) {
     }];
 
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
-
-    // // Build Bar Chart using sample data
-    // var samples = data.samples
-    // sample_values = samples.sample_values
-    // otu_ids = samples.otu_ids
-    // otu_labels = samples.otu_labels
-
-    // var barChart = {
-    //     type: 'bar',
-    //     y: samples.otu_ids.slice(0, 10).reverse(),
-    //     x: samples.sample_values.slice(0, 10).reverse(),
-    //     text: otu_labels,
-    //     marker: {
-    //         color: '#1978B5',
-    //     },
-    //     orientation: 'h'
-    // };
-
-    // var data = [barChart];
-
-    // var layout = {
-    //     title: "Top 10 Bacteria Found",
-    //     showlegend: false,
-    //     // width: 600,
-    //     // height: 400
-    // };
-
-    // Plotly.newPlot("bar", data, layout);
-
-
-    // sample_values = sample.sample_values.slice(0, 10);
-    // otu_ids = sample.otu_ids.slice(0, 10);
-    // otu_labels = sample.otu_labels.slice(0, 10);
-
-    // var trace1 = {
-    //     labels: otu_ids,
-    //     hovertext: otu_labels,
-    //     hoverinfo: "hovertext",
-    //     values: sample_values,
-    //     type: "bar"
 };
-// };
 
-
-// Build function for Bar Chart
-
-// function buildBarChart(sample) {
-//     d3.json("samples.json").then(function(samplesData) {
-
-//                 // Filter sample data to ID for plotting
-//                 var PlotSample = plotData.samples.filter(plotID => plotID.id == ID)[0];
-
-//                 console.log(PlotSample);
-
-//                 //slice top 10 of each samples data: otu_ids, otu_labels, and sample_values
-//                 //map otu_ids to string with OTU label
-//                 var sample_values = PlotSample.otu_ids.slice(0, 10).map(id => "OTU " + id.toString());
-//                 var otu_labels = PlotSample.otu_labels.slice(0, 10);
-// var otu_ids = PlotSample.sample_values.slice(0, 10);
-
-// var barChart = {
-//     type: 'bar',
-//     x: sample.otu_ids.reverse(),
-//     y: sample.sample_values.reverse(),
-//     text: otu_labels.reverse(),
-//     marker: {
-//         color: '#1978B5',
-//     },
-//     orientation: 'h'
-// };
-
-// var data = [barChart];
-
-// var layout = {
-//     title: "Top 10 Bacteria Found",
-//     showlegend: false,
-//     width: 600,
-//     height: 400
-// };
-
-// Plotly.newPlot("bar", data, layout);
 
 
 
