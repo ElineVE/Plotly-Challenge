@@ -22,8 +22,6 @@ function MetaDataSample(sample) {
         var resultsArray = metaData.filter(s => s.id == sample) //sample_id = param fed into ChartBuild
         var result = resultsArray[0]
 
-        // samplesData.metadata.forEach((metadatum) => {
-        //     if (sample.id == metadatum.id) {
 
         // Use `Object.entries` to add each key and value pair to the panel
 
@@ -47,16 +45,11 @@ function ChartBuild(sample) {
         var resultsArray = samples.filter(s => s.id = sample) //sample_id = param fed into ChartBuild
         var result = resultsArray[0]
 
-        // var SampleFilter = sample.samples.filter(plotID => plotID.id == ID)[0];
 
-        // var samples = data.sample
         var sample_values_filter = result.sample_values;
         var otu_ids_filter = result.otu_ids;
         var otu_labels_filter = result.otu_labels;
 
-        // var sample_values_filter = .otu_ids_filter.slice(0, 10).(map(otuID => `OTU ${otuID}`);
-        //     var otu_ids_filter = SampleFilter.otu_labels_filter.slice(0, 10);
-        //     var otu_labels_filte = SampleFilter.sample_values_filter.slice(0, 10);
 
         var barChart = {
             type: 'bar',
