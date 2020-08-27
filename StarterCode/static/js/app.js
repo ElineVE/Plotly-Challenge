@@ -39,6 +39,35 @@ function MetaDataSample(sample) {
 
 function ChartBuild(sample) {
 
+    // Build Bar Chart using sample data
+    // var samples = data.samples
+    sample_values = sample.sample_values
+    otu_ids = sample.otu_ids
+    otu_labels = sample.otu_labels
+
+    var barChart = {
+        type: 'bar',
+        y: sample.otu_ids.slice(0, 10).reverse(),
+        x: sample.sample_values.slice(0, 10).reverse(),
+        text: otu_labels,
+        marker: {
+            color: '#1978B5',
+        },
+        orientation: 'h'
+    };
+
+    var data = [barChart];
+
+    var layout = {
+        title: "Top 10 Bacteria Found",
+        showlegend: false,
+        // width: 600,
+        // height: 400
+    };
+
+    Plotly.newPlot("bar", data, layout);
+
+
     // Build Bubble Chart using sample data  
 
     var bubbleLayout = {
@@ -61,33 +90,33 @@ function ChartBuild(sample) {
 
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
-    // Build Bar Chart using sample data
+    // // Build Bar Chart using sample data
+    // var samples = data.samples
+    // sample_values = samples.sample_values
+    // otu_ids = samples.otu_ids
+    // otu_labels = samples.otu_labels
 
-    sample_values = sample.sample_values.slice(0, 10).reverse()
-    otu_ids = sample.otu_ids.slice(0, 10).reverse()
-    otu_labels = sample.otu_labels.slice(0, 10).reverse()
+    // var barChart = {
+    //     type: 'bar',
+    //     y: samples.otu_ids.slice(0, 10).reverse(),
+    //     x: samples.sample_values.slice(0, 10).reverse(),
+    //     text: otu_labels,
+    //     marker: {
+    //         color: '#1978B5',
+    //     },
+    //     orientation: 'h'
+    // };
 
-    var barChart = {
-        type: 'bar',
-        x: sample.otu_ids,
-        y: sample.sample_values,
-        text: otu_labels,
-        marker: {
-            color: '#1978B5',
-        },
-        orientation: 'h'
-    };
+    // var data = [barChart];
 
-    var data = [barChart];
+    // var layout = {
+    //     title: "Top 10 Bacteria Found",
+    //     showlegend: false,
+    //     // width: 600,
+    //     // height: 400
+    // };
 
-    var layout = {
-        title: "Top 10 Bacteria Found",
-        showlegend: false,
-        width: 600,
-        height: 400
-    };
-
-    Plotly.newPlot("bar", data, layout);
+    // Plotly.newPlot("bar", data, layout);
 
 
     // sample_values = sample.sample_values.slice(0, 10);
