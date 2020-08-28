@@ -133,6 +133,6 @@ function ChangeOption(newSample) {
     ChartBuild(Sample);
     MetaDataSample(Sample);
 }
-// // // Initialize dashboard
+// Initialize dashboard
 
 Init();
